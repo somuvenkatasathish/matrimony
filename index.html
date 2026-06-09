@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vivaham - Premium Matrimony | Find Your Soulmate</title>
+  <meta name="description" content="Vivaham is a premium matchmaking platform designed to help you find your perfect life partner. Discover verified profiles, check compatibility scores, and chat securely.">
+  <link rel="stylesheet" href="style.css">
+  <!-- FontAwesome for Premium Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Premium Header & Navigation -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="#" class="logo" id="logo-home">
+        <i class="fa-solid fa-gopuram"></i> Vivaham
+      </a>
+      
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#" class="nav-link active" data-view="home">Home</a></li>
+          <li><a href="#" class="nav-link" data-view="search">Find Matches</a></li>
+          <li><a href="#" class="nav-link" data-view="matchmaker">Matchmaker AI</a></li>
+          <li><a href="#" class="nav-link" data-view="inbox">Inbox</a></li>
+          <li><a href="#" class="nav-link" data-view="dashboard">My Dashboard</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" class="btn-icon" aria-label="Toggle Theme">
+          <i class="fas fa-moon"></i>
+        </button>
+
+        <!-- Notifications -->
+        <div style="position: relative;">
+          <button id="notification-btn" class="btn-icon" aria-label="Notifications">
+            <i class="fas fa-bell"></i>
+            <span id="notif-badge" class="notif-badge-indicator" style="display: none;"></span>
+          </button>
+          
+          <!-- Notifications Dropdown -->
+          <div id="notif-dropdown" class="dropdown-menu glass-card" style="display: none;">
+            <div class="dropdown-header">
+              <h4>Notifications</h4>
+              <button id="clear-notif" class="btn-text">Clear All</button>
+            </div>
+            <div class="dropdown-body" id="notif-list">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- User Profile Dropdown -->
+        <div style="position: relative;">
+          <button id="profile-dropdown-btn" class="btn-icon" style="padding: 2px;">
+            <img id="nav-user-avatar" src="" alt="User Avatar" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+          </button>
+          
+          <div id="profile-dropdown" class="dropdown-menu glass-card" style="display: none;">
+            <div class="dropdown-header user-dropdown-header">
+              <h4 id="dropdown-user-name">Sathish Kumar</h4>
+              <p id="dropdown-user-profession">Senior Engineer</p>
+            </div>
+            <div class="dropdown-body">
+              <a href="#" class="dropdown-item" id="go-dashboard-btn"><i class="fas fa-user-cog"></i> View Profile</a>
+              <a href="#" class="dropdown-item" id="register-trigger-btn"><i class="fas fa-user-plus"></i> Register New Profile</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Dynamic Content Container -->
+  <main class="main-content" id="app-view">
+    <!-- Component views will render here dynamically -->
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <div class="footer-logo"><i class="fa-solid fa-gopuram"></i> Vivaham</div>
+          <p>Vivaham is the world's most trusted matrimony service. We are dedicated to creating meaningful matches and celebrating the eternal bond of marriage.</p>
+        </div>
+        <div class="footer-column">
+          <h4>Explore</h4>
+          <ul class="footer-links">
+            <li><a href="#" class="nav-redirect" data-view="home">Home</a></li>
+            <li><a href="#" class="nav-redirect" data-view="search">Find Matches</a></li>
+            <li><a href="#" class="nav-redirect" data-view="matchmaker">Matchmaker AI</a></li>
+            <li><a href="#" class="nav-redirect" data-view="inbox">Inbox</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Support & Legal</h4>
+          <ul class="footer-links">
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Security Tips</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Follow Us</h4>
+          <div class="footer-socials">
+            <a href="#" class="btn-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="btn-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="btn-icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="btn-icon"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Vivaham Matrimony. All rights reserved. Made with love for happy beginnings.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal: Profile Details -->
+  <div id="profile-detail-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+      <button class="modal-close" id="close-profile-modal" aria-label="Close Modal">&times;</button>
+      <div id="profile-modal-body">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Register / Edit Profile Wizard -->
+  <div id="register-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content" style="max-width: 600px;">
+      <button class="modal-close" id="close-register-modal" aria-label="Close Modal">&times;</button>
+      <div style="padding: 40px;" class="glass-card">
+        <h2 style="margin-bottom: 24px; text-align: center;"><i class="fa-solid fa-gopuram" style="color: var(--secondary);"></i> Create Your Vivaham Account</h2>
+        <form id="registration-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="reg-name">Full Name</label>
+              <input type="text" id="reg-name" class="form-input" required placeholder="e.g., Priya Sen">
+            </div>
+            <div class="form-group">
+              <label for="reg-gender">Gender</label>
+              <select id="reg-gender" class="form-input" required>
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="reg-age">Age</label>
+              <input type="number" id="reg-age" class="form-input" required min="18" max="70" placeholder="25">
+            </div>
+            <div class="form-group">
+              <label for="reg-height">Height</label>
+              <input type="text" id="reg-height" class="form-input" required placeholder="e.g., 5'5&quot;">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="reg-mother-tongue">Mother Tongue</label>
+              <select id="reg-mother-tongue" class="form-input">
+                <option value="Hindi">Hindi</option>
+                <option value="Tamil">Tamil</option>
+                <option value="Telugu">Telugu</option>
+                <option value="Bengali">Bengali</option>
+                <option value="Punjabi">Punjabi</option>
+                <option value="Malayalam">Malayalam</option>
+                <option value="Gujarati">Gujarati</option>
+                <option value="Kannada">Kannada</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="reg-community">Community / Sub-caste</label>
+              <input type="text" id="reg-community" class="form-input" required placeholder="e.g., Brahmin / Iyer">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="reg-city">City</label>
+              <input type="text" id="reg-city" class="form-input" required placeholder="e.g., Chennai">
+            </div>
+            <div class="form-group">
+              <label for="reg-state">State</label>
+              <input type="text" id="reg-state" class="form-input" required placeholder="e.g., Tamil Nadu">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="reg-profession">Profession</label>
+              <input type="text" id="reg-profession" class="form-input" required placeholder="e.g., Software Engineer">
+            </div>
+            <div class="form-group">
+              <label for="reg-income">Annual Income</label>
+              <input type="text" id="reg-income" class="form-input" required placeholder="e.g., ₹15 LPA">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="reg-about">About Myself</label>
+            <textarea id="reg-about" class="form-input" rows="3" required placeholder="Tell prospective matches about your values, interests, and partner preference..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-secondary" style="width: 100%; padding: 14px; margin-top: 10px;">
+            <i class="fas fa-heart"></i> Register & Enter Vivaham
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="notification-toast" class="toast" style="display: none;">
+    <div class="toast-icon"><i class="fas fa-heart"></i></div>
+    <div class="toast-body">
+      <h5 id="toast-title">Notification</h5>
+      <p id="toast-message">Message details</p>
+    </div>
+  </div>
+
+  <!-- Styling dropdown support not in main style.css -->
+  <style>
+    .notif-badge-indicator {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      width: 10px;
+      height: 10px;
+      background-color: var(--accent);
+      border: 2px solid var(--surface-color);
+      border-radius: var(--radius-full);
+      animation: heartbeat 1.5s infinite;
+    }
+    
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 12px);
+      right: 0;
+      width: 320px;
+      max-height: 400px;
+      overflow-y: auto;
+      z-index: 200;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      animation: fadeIn 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+    
+    .dropdown-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--surface-hover);
+    }
+    
+    .user-dropdown-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+    
+    .dropdown-body {
+      padding: 8px 0;
+    }
+    
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      color: var(--text-main);
+    }
+    
+    .dropdown-item:hover {
+      background-color: var(--surface-hover);
+      color: var(--primary);
+    }
+
+    body.dark-theme .dropdown-item:hover {
+      color: var(--secondary);
+    }
+    
+    .notif-item {
+      padding: 12px 20px;
+      border-bottom: 1px solid rgba(0,0,0,0.03);
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 0.85rem;
+    }
+    
+    .notif-item:hover {
+      background-color: var(--surface-hover);
+    }
+    
+    .notif-item.unread {
+      background-color: rgba(212, 175, 55, 0.08);
+      border-left: 3px solid var(--secondary);
+    }
+    
+    .notif-item p {
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+    
+    .notif-item span {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .btn-text {
+      background: none;
+      border: none;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+    body.dark-theme .btn-text {
+      color: var(--secondary);
+    }
+  </style>
+
+  <!-- Load Scripts in Correct Order -->
+  <script src="database.js"></script>
+  <script src="home.js"></script>
+  <script src="search.js"></script>
+  <script src="profile-detail.js"></script>
+  <script src="matchmaker.js"></script>
+  <script src="inbox.js"></script>
+  <script src="dashboard.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

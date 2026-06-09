@@ -1,0 +1,18 @@
+{
+  "name": "vivaham-matrimony",
+  "version": "1.0.0",
+  "description": "Vivaham Matrimony - A premium, modern, and beautiful matrimony website.",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx -y serve ./",
+    "dev": "npx -y serve ./"
+  },
+  "keywords": [
+    "matrimony",
+    "matchmaking",
+    "vivaham",
+    "wedding"
+  ],
+  "author": "Vivaham Dev Team",
+  "license": "ISC"
+}
